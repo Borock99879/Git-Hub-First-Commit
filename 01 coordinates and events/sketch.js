@@ -10,6 +10,11 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
+// screen is updated at bottom of draw
 function draw() {
-  background(220);
-}
+  background(0); 
+  
+  //     x    y   diameter
+  circle(mouseX, mouseY, 50);}
+  
+                           
