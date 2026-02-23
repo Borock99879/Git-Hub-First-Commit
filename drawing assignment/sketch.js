@@ -2,9 +2,10 @@
 // Ben Sykes
 // 2/11/2026
 
-
+//position
 let px;  
 let py; 
+
 let is_night = false;
 
 function setup() {
@@ -15,6 +16,7 @@ function setup() {
 
 function draw() {
   let horz_line = 3*windowHeight/4;
+  //handles background and sun change
   if (is_night){
     background("black");
     fill("white");
@@ -28,7 +30,7 @@ function draw() {
   
 
  
-  
+  //sun
   circle(mouseX,mouseY,200);
 
   fill("#25FDFD");//mountains/ground
@@ -64,6 +66,8 @@ fill("#CD733D");
 rect(px+8, py-50, 20, 10);
 rect(px-24, py-50, 20, 10);
 
+
+//handles movement
  if (keyIsDown(65)){//a
   if (px >= 0 && px <= windowWidth){
     px += -5;
@@ -91,7 +95,7 @@ rect(px-24, py-50, 20, 10);
 }
 
 
-function keyPressed(){
+function keyPressed(){ //changes background if space key is pressed
   if ( keyCode === 32){
     if (is_night){
       is_night = false 
