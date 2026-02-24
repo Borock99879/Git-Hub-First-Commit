@@ -8,14 +8,17 @@ let py;
 
 let is_night = false;
 
+let currentBack = 0;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   px = windowWidth/2;
   py = windowHeight*3/4;
+  
 }
 
 function draw() {
-  let horz_line = 3*windowHeight/4;
+  
   //handles background and sun change
   if (is_night){
     background("black");
@@ -33,18 +36,13 @@ function draw() {
   //sun
   circle(mouseX,mouseY,200);
 
-  fill("#25FDFD");//mountains/ground
-  
-  triangle(0, horz_line, windowWidth/8, windowHeight/3, windowWidth/4, horz_line);
-  triangle(windowWidth/4, horz_line, 3*windowWidth/8, windowHeight/4, windowWidth/2, horz_line);
-  triangle(windowWidth/2, horz_line, 5*windowWidth/8, windowHeight/2, 3*windowWidth/4, horz_line);
-  triangle(3*windowWidth/4, horz_line, 7*windowWidth/8, windowHeight/5, windowWidth, horz_line);
+  drawMountain();
  
   
   
 
 
-  rect(0, horz_line-50,windowWidth, horz_line);
+  
   console.log(keyCode)
   
   penguin();
@@ -90,8 +88,8 @@ rect(px-24, py-50, 20, 10);
       }
   }
   
-   
-  
+  textSize(50)
+  text("Ben Sykes", 0,windowHeight-10);
 }
 
 
@@ -104,4 +102,41 @@ function keyPressed(){ //changes background if space key is pressed
       is_night = true
     } 
   }
+  //handles color change of mountains
+  else if(keyCode === 49){ //1
+    currentBack = 0;
+  }
+  else if(keyCode === 50){ //2 
+    currentBack = 1;
+  }
+  else if(keyCode === 51 ){// 3
+    currentBack = 2;
+  }
+  else if(keyCode === 52){// 4
+    currentBack = 3;
+  }
 }  
+
+// draws mountains and gorund
+function drawMountain(){// changes color
+  let horz_line = 3*windowHeight/4;
+  if (currentBack === 0){
+    fill("#25FDFD");
+  }
+  else if (currentBack === 1){
+    fill("red");
+  }
+  else if (currentBack === 2){
+    fill("green");
+  }
+  else if (currentBack === 3){
+    fill("yellow");
+  }
+  
+  //mountains and ground
+  triangle(0, horz_line, windowWidth/8, windowHeight/3, windowWidth/4, horz_line);
+  triangle(windowWidth/4, horz_line, 3*windowWidth/8, windowHeight/4, windowWidth/2, horz_line);
+  triangle(windowWidth/2, horz_line, 5*windowWidth/8, windowHeight/2, 3*windowWidth/4, horz_line);
+  triangle(3*windowWidth/4, horz_line, 7*windowWidth/8, windowHeight/5, windowWidth, horz_line);
+  rect(0, horz_line-50,windowWidth, horz_line);
+}
