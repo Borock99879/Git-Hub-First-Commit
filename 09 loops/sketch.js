@@ -28,7 +28,7 @@ function populatearray(){
 function drawbubbles(){
   for(let i = 0; bubbles.length; i ++){
     let b = bubbles[i];
-    circle(i, b.y, size );
+    circle(b.x, b.y, size );
     textAlign(CENTER, CENTER);
     let d = dist(b.x, b.y, mouseX, mouseY);
     text(d, b.x, b.y);
