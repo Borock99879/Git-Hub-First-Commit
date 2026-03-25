@@ -12,7 +12,7 @@ function setup() {
 }
 
 function draw() {
-  
+  background(220);
   mybook.display();
 }
 
@@ -31,13 +31,13 @@ class Book{
   display(){
     rectMode(CENTER); textAlign(CENTER,CENTER);
     textSize(20);
-    switch(this.author.cover){
+    switch(this.cover){
       case "softcover":
-        fill(random(255),random(255), random(255)); break;
+        fill("blue"); break;
       case "hardcover":
-        fill(random(255),random(255), random(255)); break;
-        case "leatherbound":
-          fill(random(255),random(255), random(255)); break;
+        fill("red"); break;
+      case "leatherbound":
+        fill("green"); break;
     }
     push();
     translate(this.x, height/2);
