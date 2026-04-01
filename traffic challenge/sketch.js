@@ -13,14 +13,15 @@ let green = true;
 let timer = 0
 let new_time;
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
   for (let i = 0; i < 20; i ++){ 
-    eastbound.push(new Vehicle(random(1,2), random(0,width) , random(height/2+20, 3*height/4), color(random(255), random(255), random(255)), 0, random(1,20)));
+    eastbound.push(new Vehicle(random(1,2), random(0,width) , random(height/2+20, 3*height/4), color(random(255), random(255), random(255)), 0, random(-3,20)));
   }
   for (let i = 0; i < 20; i ++){ 
-    westbound.push(new Vehicle(random(1,2), random(0,width) , random(height/4, height/2-80), color(random(255), random(255), random(255)), 1, random(1,20)));
+    westbound.push(new Vehicle(random(1,2), random(0,width) , random(height/4, height/2-80), color(random(255), random(255), random(255)), 1, random(-3,20)));
   }
 
   
@@ -59,21 +60,24 @@ class Vehicle{
      this.x = x; this.y = y;
      this.color = color;
      this.direction = direction; this.speed = speed
+     
+     
+     
   }
   action(){
-    this.display();
+    
+      this.display();
+    
+    
     if(green){
       this.move();
       this.speedup();
+      
     this.speeddown();
     this.changecolor();
+
     }
-    
-    
-    
-    
-    
-    
+   
   }
   display(){
     
@@ -117,13 +121,18 @@ class Vehicle{
   speedup(){
     let can_speedup = random(1,100);
     if (can_speedup < 5){
-      this.speed += 0.5;
+      
+        this.speed += 0.5;
+      
+      
     }
   }
   speeddown(){
     let can_speeddown = random(1,100);
     if(can_speeddown < 5){
-      this.speed -= 0.5;            
+      
+        this.speed -= 0.5;
+                  
     }
   }
   changecolor(){
@@ -132,6 +141,7 @@ class Vehicle{
       this.color = color(random(255), random(255), random(255));
     }
   }
+  
 }
 
 function draw_road(){
@@ -146,10 +156,15 @@ function draw_road(){
 
 function mousePressed(){
   if (mouseButton === LEFT){
-    eastbound.push(new Vehicle(random(1,2), random(0,width) , random(height/2+20, 3*height/4), color(random(255), random(255), random(255)), 0, random(1,20)));
+    for(let i = 0; i < 5; i ++){
+      eastbound.push(new Vehicle(random(1,2), random(0,width) , random(height/2+20, 3*height/4), color(random(255), random(255), random(255)), 0, random(-3,20)));
+    }
+    
   }
   if (mouseButton === CENTER){
-    westbound.push(new Vehicle(random(1,2), random(0,width) , random(height/4, height/2-80), color(random(255), random(255), random(255)), 1, random(1,20)));
+    for(let i = 0; i < 5; i ++){
+    westbound.push(new Vehicle(random(1,2), random(0,width) , random(height/4, height/2-80), color(random(255), random(255), random(255)), 1, random(-3,20)));
+    }
   }
 }
 
@@ -161,3 +176,4 @@ function keyPressed(){
     }
   }
 }
+
