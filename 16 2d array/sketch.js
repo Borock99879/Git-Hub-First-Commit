@@ -6,19 +6,19 @@
 // - describe what you did to take this project "above and beyond"
 //grid is 5 x 5
 
-let grid = [
-  [255,255,0,0,0],
-  [0,255,255,0,0],
-  [0,0,255,0,0],
-  [0,0,0,255,0],
-  [0,0,0,0,255]
-]
-let rows = grid.length;
-let cols = grid[0].length;
-let size = 60;
+let grid = []
+let rows
+let cols 
+let size 
+
 
 function setup() {
+  randomize();
+  rows = grid.length;
+  cols = grid[0].length;
+  size = 100;
   createCanvas(cols*size, rows*size);
+  
 }
 
 function draw() {
@@ -57,6 +57,47 @@ function flip(x,y){
     grid[y][x] = 0;
   }
 }
+
 function mousePressed(){
-  flip(currx(),curry())
+  if( mouseX < width && mouseY < height){
+    let x = currx();
+    let y = curry();
+    if(keyIsPressed && keyCode == 16){
+      flip(x,y);
+    }
+    
+    else{
+      flip(x,y);
+      if(x-1>=0){
+        flip(x-1,y);
+      }
+      if(y-1 >= 0){
+        flip(x,y-1);
+    }
+    if(x+1 <= width){
+      flip(x+1,y);
+  }
+  if(y+1 <= height){
+    flip(x,y+1);
+}
+    
+  }
+}
+}
+
+function randomize(){
+  grid =  [
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0]]
+  for(let x = 0; x < grid.length; x ++){
+    for(let y = 0; y < grid[0].length; y++){
+      let r = random(1,2);
+      if (r <= 1.5){
+        flip(x,y)
+      }
+    }
+  }
 }
