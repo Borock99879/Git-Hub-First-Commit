@@ -10,11 +10,11 @@ let grid = []
 let rows
 let cols 
 let size 
-let mode = 2
+let mode = 2 // defaults mode. mode 1 = 1 tile. 2 = cross. 3 = square
 
 
 function setup() {
-  randomize();
+  randomize();//randomizes and sets up the rows and cols variables
   rows = grid.length;
   cols = grid[0].length;
   size = 100;
@@ -26,14 +26,10 @@ function draw() {
   background(220);
   rendergrid();
   overlay();
-  //changemode();
   win();
-  if (keyIsPressed){
-    console.log(keyCode)
-  }
 }
 
-function rendergrid(){
+function rendergrid(){//sets up the grid
   for(let y = 0; y < rows; y ++){
     for( let x = 0; x < cols; x++){
       let c = grid[y][x];
@@ -43,7 +39,7 @@ function rendergrid(){
   }
 }
 
-function currx(){
+function currx(){ // constrains clicking for within the boxes
   let constrainx = constrain(mouseX, 0 , width-1);
   return floor(constrainx/size);
 }
@@ -53,7 +49,7 @@ function curry(){
   return floor(constrainy/size);
 }
 
-function flip(x,y){
+function flip(x,y){ // changes the value of the box
   if (grid[y][x] === 0){
     grid[y][x] = 255
   }
@@ -63,7 +59,7 @@ function flip(x,y){
 }
 
 function mousePressed(){
-  if( mouseX < width && mouseY < height){
+  if( mouseX < width && mouseY < height){ // changes squares based on the mode
     let x = currx();
     let y = curry();
     if(mode === 1){
@@ -100,7 +96,7 @@ function mousePressed(){
 }
 }
 
-function randomize(){
+function randomize(){ // randomizes the grid set up by setting up random grid values
   grid =  [
   [0,0,0,0,0],
   [0,0,0,0,0],
@@ -117,16 +113,16 @@ function randomize(){
   }
 }
 
-function win(){
+function win(){ // calculates a win by adding up all the points. If all the points are = to 0 or 255 * grid slots, then win is true and it diplays it
   let points = 0
   for(let x = 0; x < grid.length; x++){
     for(let y = 0; y < grid[0].length; y++){
       if(grid[x][y] === 255){
-        points ++
+        points += grid[x][y];
       }
     }
   }
-  if(points === rows * cols || points === 0){
+  if(points === rows * cols * 255 || points === 0){
     textAlign(CENTER);
     fill(255,0,0);
     textSize(30);
@@ -134,7 +130,7 @@ function win(){
   }
 }
 
-function overlay(){
+function overlay(){ // based on the mode, it creates an overlay
   fill(146,240,177,150);
   let x = currx();
   let y = curry()
@@ -156,8 +152,8 @@ function overlay(){
   }
 }
 
-function changemode(){
-  if(keyIsDown(16)){
+function changemode(){// changes the mode based on the key pressed. I have shift key pressed instead of held because it makes the game flow better
+  if(keyIsDown(16)){//shift
     if(mode !== 1){
       mode = 1
     }
@@ -168,7 +164,7 @@ function changemode(){
   }
 
 
-  if (keyIsDown(32)){
+  if (keyIsDown(32)){//space
     if (mode === 2){
        mode = 3
     }
@@ -178,7 +174,7 @@ function changemode(){
     }
   }  
 
-  function keyPressed(){
+  function keyPressed(){//senses if a key is pressed in order to change the mode
     changemode()
   }
  
