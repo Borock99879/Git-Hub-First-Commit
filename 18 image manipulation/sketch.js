@@ -6,23 +6,28 @@
 // - describe what you did to take this project "above and beyond"
 
 let image1;
+let c;
 
 function preload(){
   image1 = loadImage("assets/aviator.png")
 }
 
 function setup() {
-  createCanvas(image1.width, image1.height);
+  createCanvas(640,480);
+  myvid = createCapture(VIDEO);
   pixelDensity(1);
+  c = color(random(255),random(255),random(255), random(255))
 }
 
 function draw() {
   background(220);
-  image(image1,0,0)
+  image(myvid,0,0)
   loadPixels();
-  boost();
-  grey();
-  updatePixels();
+  //boost();
+  //grey();
+  loadPixels();
+  background(0);
+  txt();
 }
 
 function boost(){
@@ -61,4 +66,31 @@ function setpixel(pos, r, g, b){
   pixels[pos] = r;
   pixels[pos+1 ] = g;
   pixels[pos + 2] = b;
+}
+
+function txt(){
+  fill(c)
+;
+let scaleam = 3;
+textSize = scaleam;
+for(let x = 0; x < width; x += scaleam){
+  for(let y = 0; y <height; y += scaleam){
+    let avg = getavg(x,y);
+    if(avg > 210){
+      text("&", x, y)
+    }
+    else if(avg > 170){
+      text("T", x, y)
+    }
+    else if(avg > 130){
+      text("x", x, y)
+    }
+    else if(avg > 90){
+      text(":", x, y)
+    }
+    else if(avg > 45){
+      text(".", x, y)
+    }
+  }
+}
 }
