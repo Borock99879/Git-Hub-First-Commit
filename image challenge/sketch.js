@@ -161,9 +161,9 @@ function mirror(x,y){
   let b = pixels[index+2];
   //mirrors one half of screen
   if (x < width){
-    let mirror  = ((y*width) + ( (width/2) * (1-x))) * 4 // uses the same process as index variable, but instead of x, it is the ofset of x
+    let mirror  = ((y*width) + ((width/2) - (x+width/2))) * 4 // uses the same process as index variable, but takes the half way point at senses the more right it gets, the more left its put
     pixels[mirror] = r;
-    pixels[ mirror - 1] = g;
+    pixels[ mirror - 1] = g;//gives cool effect
     pixels[mirror - 2] = b;
 
   }
